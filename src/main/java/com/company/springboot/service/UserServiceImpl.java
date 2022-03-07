@@ -1,10 +1,10 @@
 package com.company.springboot.service;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.company.springboot.dto.UserRegistrationDto;
+import com.company.springboot.repository.RoleRepository;
 import com.company.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,20 +21,24 @@ import com.company.springboot.model.User;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         super();
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
     public User save(UserRegistrationDto registrationDto) {
         User user = new User(registrationDto.getFirstName(),
-                registrationDto.getLastName(), registrationDto.getEmail(),
-                passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
+                registrationDto.getLastName(),
+                registrationDto.getEmail(),
+                passwordEncoder.encode(registrationDto.getPassword()),
+                Collections.singleton(roleRepository.getOne(1L)));
 
         return userRepository.save(user);
     }

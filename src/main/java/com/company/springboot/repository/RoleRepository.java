@@ -1,10 +1,9 @@
 package com.company.springboot.repository;
 
-import com.company.springboot.model.Employee;
+import com.company.springboot.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long>{
-
+public interface RoleRepository extends JpaRepository<Role, Long> {
 }

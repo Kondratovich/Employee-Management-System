@@ -1,7 +1,5 @@
 package com.company.springboot.controller;
 
-import com.company.springboot.model.Project;
-import com.company.springboot.service.CustomerService;
 import com.company.springboot.service.ProjectService;
 import org.springframework.stereotype.Controller;
 
