@@ -7,6 +7,10 @@ import com.company.springboot.dto.UserRegistrationDto;
 import com.company.springboot.repository.RoleRepository;
 import com.company.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,6 +34,37 @@ public class UserServiceImpl implements UserService {
         super();
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+    }
+
+    @Override
+    public List<User> getAllEmployees() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User getEmployeeById(long id) {
+        Optional<User> optional = userRepository.findById(id);
+        User employee = null;
+        if (optional.isPresent()) {
+            employee = optional.get();
+        } else {
+            throw new RuntimeException(" Employee not found for id :: " + id);
+        }
+        return employee;
+    }
+
+    @Override
+    public void deleteEmployeeById(long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<User> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return userRepository.findAll(pageable);
     }
 
     @Override

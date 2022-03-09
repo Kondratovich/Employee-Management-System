@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>IT Company</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css"
+          rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Система управления персоналом</h1>
+    <hr>
+    <h2>Редактирование данных проекта</h2>
+
+    <form action="#" th:action="@{/manager/projects/save}" th:object="${project}"
+          method="POST">
+
+        <!-- Add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}"/>
+
+        <label th:for="*{name}">Название</label>
+        <input type="text" th:field="*{name}" class="form-control mb-4 col-4">
+
+        <label th:for="*{description}">Описание</label>
+        <textarea th:field="*{description}" class="form-control mb-4 col-4">
+        </textarea>
+
+        <label th:for="*{dateAdded}">Дата начала разработки</label>
+        <input type="text" th:field="*{dateAdded}" class="form-control mb-4 col-4 datepicker">
+
+        <label th:for="*{deadline}">Дедлайн</label>
+        <input type="text" th:field="*{deadline}" class="form-control mb-4 col-4 datepicker">
+
+        <label th:for="*{customerId}">Заказчик</label>
+        <select th:field="*{customerId}" class="form-control mb-4 col-4">
+            <option th:each="cmr : ${listCustomers}" th:value="${cmr.id}" th:text="${cmr.lastName}"></option>
+        </select>
+
+        <label th:for="*{price}">Стоимость</label>
+        <input type="text" th:field="*{price}" class="form-control mb-4 col-4">
+
+        <button type="submit" class="btn btn-info col-2">Изменить</button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/manager/projects}">Вернуться к списку проектов</a>
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $(".datepicker").datepicker({
+            format: "yyyy-mm-dd",
+            viewMode: "years",
+            minViewMode: "days",
+            autoclose: true
+        });
+    })
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+</body>
+</html>

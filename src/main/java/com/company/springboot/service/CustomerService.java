@@ -1,7 +1,6 @@
 package com.company.springboot.service;
 
 import com.company.springboot.model.Customer;
-import com.company.springboot.model.Employee;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

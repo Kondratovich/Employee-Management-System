@@ -1,10 +1,6 @@
 package com.company.springboot.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tasks")
@@ -14,7 +10,9 @@ public class Task {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private long id;
 
-    private long projectId;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
     private String name;
 
@@ -46,12 +44,12 @@ public class Task {
         this.description = description;
     }
 
-    public long getProjectId() {
-        return projectId;
+    public Project getProject() {
+        return project;
     }
 
-    public void setProjectId(long projectId) {
-        this.projectId = projectId;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public String getStatus() {

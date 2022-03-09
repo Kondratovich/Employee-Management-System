@@ -14,8 +14,11 @@ public class Team {
     @Column(name = "office_location")
     private String officeLocation;
 
-    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "team")
     private Collection<Project> projects;
+
+    @OneToMany(mappedBy = "userTeam")
+    private Collection<User> users;
 
     public long getId() {
         return id;
@@ -39,5 +42,13 @@ public class Team {
 
     public void setProjects(Collection<Project> projects) {
         this.projects = projects;
+    }
+
+    public Collection<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Collection<User> users) {
+        this.users = users;
     }
 }

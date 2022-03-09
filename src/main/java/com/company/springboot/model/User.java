@@ -6,21 +6,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
 @Entity
-@Table(name =  "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name =  "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User implements UserDetails {
 	
 	@Id
@@ -36,21 +25,26 @@ public class User implements UserDetails {
 	private String email;
 	
 	private String password;
-	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
+	private String position;
+
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "users_roles",
 			joinColumns = @JoinColumn(
 		            name = "user_id", referencedColumnName = "id"),
 			inverseJoinColumns = @JoinColumn(
 				            name = "role_id", referencedColumnName = "id"))
-	
 	private Set<Role> roles;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "team_id")
+	private Team userTeam;
+
 	public User() {
 		
 	}
-	
+
 	public User(String firstName, String lastName, String email, String password, Set<Role> roles) {
 		super();
 		this.firstName = firstName;
@@ -58,6 +52,17 @@ public class User implements UserDetails {
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
+		this.position = position;
+	}
+
+	public User(String firstName, String lastName, String email, String password, String position, Set<Role> roles) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+		this.position = position;
 	}
 
 	public Long getId() {
@@ -136,5 +141,21 @@ public class User implements UserDetails {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public Team getUserTeam() {
+		return userTeam;
+	}
+
+	public void setUserTeam(Team userTeam) {
+		this.userTeam = userTeam;
 	}
 }

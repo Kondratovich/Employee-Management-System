@@ -66,8 +66,9 @@
             <h3 class="float-md-start mb-0">Система управления</h3>
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <a class="nav-link active" th:href="@{/}">Главная</a>
-                <a class="nav-link" th:href="@{/login}">Вход</a>
-                <a class="nav-link" th:href="@{/registration}">Регистрация</a>
+                <a class="nav-link" sec:authorize="!isAuthenticated()" th:href="@{/login}">Вход</a>
+                <a class="nav-link" sec:authorize="!isAuthenticated()" th:href="@{/registration}">Регистрация</a>
+                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">Выход из аккаунта</a>
             </nav>
         </div>
     </header>
@@ -85,10 +86,12 @@
             системным администратором средней квалификации, то крупной
             организации необходим комплексный подход к созданию IT
             инфраструктуры, который включает в себя создание IT отдела. </p>
-<!--        <p class="lead">-->
-<!--            <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Узнать больше</a>-->
-<!--        </p>-->
+        <p sec:authorize="isAuthenticated()" class="lead">
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/manager/projects}" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Перейти в личный кабинет менеджера</a>
+            <a sec:authorize="hasRole('ROLE_USER')" th:href="@{/user}" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Перейти в личный кабинет сотрудника</a>
+        </p>
     </main>
+
 
     <footer class="mt-auto text-white-50">
         <p> &copy; 2022 - Курсовая работа - Артем Кондратович - <a

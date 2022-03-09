@@ -1,53 +1,38 @@
-package com.company.springboot.model;
+package com.company.springboot.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.company.springboot.model.Customer;
+import com.company.springboot.model.Task;
+import com.company.springboot.model.Team;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
-import java.util.Collection;
 import java.util.Date;
 
-@Entity
-@Table(name = "projects")
-public class Project {
+public class ProjectDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private long customerId;
 
-    @ManyToOne
-    @JoinColumn(name = "team_id")
-    private Team team;
+    private long teamId;
 
-    @Column(name = "project_name")
     private String name;
 
-    @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(columnDefinition = "DATE")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateAdded;
 
-    //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @Column(columnDefinition = "DATE")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date deadline;
 
     private long price;
 
-    @OneToMany(mappedBy = "project")
-    private Collection<Task> tasks;
-
-    public Project() {
+    public ProjectDto() {
     }
 
-    public Project(Customer customer, String name, String description, Date dateAdded, Date deadline, long price) {
-        this.customer = customer;
+    public ProjectDto(long id, long customerId, String name, String description, Date dateAdded, Date deadline, long price) {
+        this.id = id;
+        this.customerId = customerId;
         this.name = name;
         this.description = description;
         this.dateAdded = dateAdded;
@@ -63,20 +48,20 @@ public class Project {
         this.id = id;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public long getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
-    public Team getTeam() {
-        return team;
+    public long getTeamId() {
+        return teamId;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setTeamId(long teamId) {
+        this.teamId = teamId;
     }
 
     public String getName() {
@@ -118,13 +103,4 @@ public class Project {
     public void setPrice(long price) {
         this.price = price;
     }
-
-    public Collection<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(Collection<Task> tasks) {
-        this.tasks = tasks;
-    }
-
 }
