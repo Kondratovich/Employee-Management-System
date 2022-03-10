@@ -76,46 +76,62 @@
         <div class="row justify-content-center">
             <div class="col-md-6 col-md-offset-3">
 
-                <!-- success message -->
                 <div th:if="${param.success}">
-                    <div class="alert alert-info">You've successfully registered
-                        to our awesome app!
+                    <div class="alert alert-info">
+                        Вы успешно зарегистрировались!
                     </div>
                 </div>
 
-                <h1>Registration</h1>
+                <div th:if="${param.passwordsMismatch}">
+                    <div class="alert alert-danger">
+                        Указанные пароли не совпадают!
+                    </div>
+                </div>
+
+                <div th:if="${param.alreadyExists}">
+                    <div class="alert alert-danger">
+                        Пользователь с данным логином уже зарегистрирован!
+                    </div>
+                </div>
+
+                <h1>Регистрация</h1>
 
                 <form th:action="@{/registration}" method="post" th:object="${user}">
                     <div class="form-group">
-                        <label class="control-label" for="firstName"> First Name </label>
+                        <label class="control-label" for="firstName"> Имя </label>
                         <input id="firstName" class="form-control" th:field="*{firstName}"
-                               required autofocus="autofocus"/>
+                               />
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label" for="lastName"> Last Name </label> <input
+                        <label class="control-label" for="lastName"> Фамилия </label> <input
                             id="lastName" class="form-control" th:field="*{lastName}"
-                            required autofocus="autofocus"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="email"> Email </label> <input
-                            id="email" class="form-control" th:field="*{email}" required
                             autofocus="autofocus"/>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label" for="password"> Password </label> <input
-                            id="password" class="form-control" type="password"
-                            th:field="*{password}" required autofocus="autofocus"/>
+                        <label class="control-label" for="email"> Почта </label> <input
+                            id="email" class="form-control" th:field="*{email}"
+                            autofocus="autofocus"/>
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success m-4">Register</button>
+                        <label class="control-label" for="password"> Пароль </label> <input
+                            id="password" class="form-control" type="password"
+                            th:field="*{password}" autofocus="autofocus"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="password"> Повторите пароль </label> <input
+                            id="repeatedPassword" class="form-control" type="password"
+                            th:field="*{repeatedPassword}" autofocus="autofocus"/>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success m-4">Зарегистрироваться</button>
                     </div>
                     <div class="form-group">
-                        <span>Already registered? <a href="/" th:href="@{/login}">Login
-								here</a></span>
+                        <span>Уже зарегистрированы? <a href="/" th:href="@{/login}">Логин здесь</a></span>
                     </div>
                 </form>
             </div>

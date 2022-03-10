@@ -18,29 +18,37 @@
     <form action="#" th:action="@{/manager/projects/save}" th:object="${project}"
           method="POST">
 
-        <!-- Add hidden form field to handle update -->
+        <div th:if="${#fields.hasErrors()}" class="alert alert-danger">
+            <p th:if="${#fields.hasErrors('name')}">- Имя должно быть больше 1 и меньше 30 символов</p>
+            <p th:if="${#fields.hasErrors('description')}">- Описание должно быть больше 1 и меньше 300 символов</p>
+            <p th:if="${#fields.hasErrors('dateAdded')}">- Дата старта проекта обязательна</p>
+            <p th:if="${#fields.hasErrors('deadline')}">- Дедлайн обязательный</p>
+            <p th:if="${#fields.hasErrors('customerId')}">- Заказчик обязательный</p>
+            <p th:if="${#fields.hasErrors('price')}">- Стоимость должна быть больше 100$ и меньше 999'999$</p>
+        </div>
+
         <input type="hidden" th:field="*{id}"/>
 
         <label th:for="*{name}">Название</label>
-        <input type="text" th:field="*{name}" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{name}" th:class="${#fields.hasErrors('name')}? 'form-control mb-4 col-4 is-invalid' : 'form-control mb-4 col-4'">
 
         <label th:for="*{description}">Описание</label>
-        <textarea th:field="*{description}" class="form-control mb-4 col-4">
+        <textarea th:field="*{description}" th:class="${#fields.hasErrors('description')}? 'form-control mb-4 col-4 is-invalid' : 'form-control mb-4 col-4'">
         </textarea>
 
         <label th:for="*{dateAdded}">Дата начала разработки</label>
-        <input type="text" th:field="*{dateAdded}" class="form-control mb-4 col-4 datepicker">
+        <input type="text" th:field="*{dateAdded}" class="${#fields.hasErrors('dateAdded')}? 'form-control mb-4 col-4 is-invalid datepicker' : 'form-control mb-4 col-4 datepicker'">
 
         <label th:for="*{deadline}">Дедлайн</label>
-        <input type="text" th:field="*{deadline}" class="form-control mb-4 col-4 datepicker">
+        <input type="text" th:field="*{deadline}" class="${#fields.hasErrors('deadline')}? 'form-control mb-4 col-4 is-invalid datepicker' : 'form-control mb-4 col-4 datepicker'">
 
         <label th:for="*{customerId}">Заказчик</label>
         <select th:field="*{customerId}" class="form-control mb-4 col-4">
             <option th:each="cmr : ${listCustomers}" th:value="${cmr.id}" th:text="${cmr.lastName}"></option>
         </select>
 
-        <label th:for="*{price}">Стоимость</label>
-        <input type="text" th:field="*{price}" class="form-control mb-4 col-4">
+        <label th:for="*{price}">Стоимость($)</label>
+        <input type="text" th:field="*{price}" th:class="${#fields.hasErrors('price')}? 'form-control mb-4 col-4 is-invalid' : 'form-control mb-4 col-4'">
 
         <button type="submit" class="btn btn-info col-2">Изменить</button>
     </form>

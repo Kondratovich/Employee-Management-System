@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.company.springboot.dto.UserRegistrationDto;
+import com.company.springboot.dto.UserDto;
 import com.company.springboot.service.UserService;
 
 @Controller
@@ -21,8 +21,8 @@ public class UserRegistrationController {
     }
 
     @ModelAttribute("user")
-    public UserRegistrationDto userRegistrationDto() {
-        return new UserRegistrationDto();
+    public UserDto userRegistrationDto() {
+        return new UserDto();
     }
 
     @GetMapping
@@ -31,7 +31,15 @@ public class UserRegistrationController {
     }
 
     @PostMapping
-    public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto) {
+    public String registerUserAccount(@ModelAttribute("user") UserDto registrationDto) {
+
+        if (userService.getEmployeeByEmail(registrationDto.getEmail()) != null) {
+            return "redirect:/registration?alreadyExists";
+        }
+
+        if (!registrationDto.getPassword().equals(registrationDto.getRepeatedPassword())) {
+            return "redirect:/registration?passwordsMismatch";
+        }
 
         userService.save(registrationDto);
 

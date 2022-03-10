@@ -8,8 +8,10 @@ import com.company.springboot.service.ProjectService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,7 +40,15 @@ public class ProjectController {
     }
 
     @PostMapping("/projects/save")
-    public String save(@ModelAttribute("project") ProjectDto projectDto) {
+    public String save(@ModelAttribute("project") @Valid ProjectDto projectDto, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+
+            Collection<Customer> customers = customerService.getAllCustomers();
+            model.addAttribute("listCustomers", customers);
+
+            return "add_project";
+        }
 
         Project project;
         if (projectDto.getId() != 0) {

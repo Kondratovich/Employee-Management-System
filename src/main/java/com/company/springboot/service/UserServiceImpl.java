@@ -3,7 +3,7 @@ package com.company.springboot.service;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.company.springboot.dto.UserRegistrationDto;
+import com.company.springboot.dto.UserDto;
 import com.company.springboot.repository.RoleRepository;
 import com.company.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +54,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getEmployeeByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
     public void deleteEmployeeById(long id) {
         userRepository.deleteById(id);
     }
@@ -68,13 +73,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(UserRegistrationDto registrationDto) {
-        User user = new User(registrationDto.getFirstName(),
+    public User save(UserDto registrationDto) {
+        User user = new User(
+                registrationDto.getFirstName(),
                 registrationDto.getLastName(),
                 registrationDto.getEmail(),
                 passwordEncoder.encode(registrationDto.getPassword()),
-                Collections.singleton(roleRepository.getOne(1L)));
+                Collections.singleton(roleRepository.getOne(1L))
+        );
 
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User edit(User user) {
         return userRepository.save(user);
     }
 

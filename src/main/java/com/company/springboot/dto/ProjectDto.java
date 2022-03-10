@@ -1,30 +1,38 @@
 package com.company.springboot.dto;
 
-import com.company.springboot.model.Customer;
-import com.company.springboot.model.Task;
-import com.company.springboot.model.Team;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class ProjectDto {
 
     private long id;
 
+    @NotNull
     private long customerId;
 
     private long teamId;
 
+    @Size(min = 2, max = 30)
     private String name;
 
+    @Size(min = 2, max = 300)
     private String description;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
     private Date dateAdded;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
     private Date deadline;
 
+    @Min(100)
+    @Max(999999)
     private long price;
 
     public ProjectDto() {

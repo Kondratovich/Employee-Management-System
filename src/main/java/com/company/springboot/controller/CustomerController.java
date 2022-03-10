@@ -1,13 +1,14 @@
 package com.company.springboot.controller;
 
 import com.company.springboot.model.Customer;
-import com.company.springboot.model.Project;
 import com.company.springboot.service.CustomerService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -30,7 +31,11 @@ public class CustomerController {
 	}
 
 	@PostMapping("/customers/save")
-	public String save(@ModelAttribute("employee") Customer customer) {
+	public String save(@Valid Customer customer, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			return "add_customer";
+		}
 
 		customerService.saveCustomer(customer);
 

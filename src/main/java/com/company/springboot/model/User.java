@@ -26,8 +26,6 @@ public class User implements UserDetails {
 	
 	private String password;
 
-	private String position;
-
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "users_roles",
@@ -41,21 +39,15 @@ public class User implements UserDetails {
 	@JoinColumn(name = "team_id")
 	private Team userTeam;
 
+	@ManyToOne
+	@JoinColumn(name = "position_id")
+	private Position position;
+
 	public User() {
 		
 	}
 
 	public User(String firstName, String lastName, String email, String password, Set<Role> roles) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.roles = roles;
-		this.position = position;
-	}
-
-	public User(String firstName, String lastName, String email, String password, String position, Set<Role> roles) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -143,19 +135,19 @@ public class User implements UserDetails {
 		this.roles = roles;
 	}
 
-	public String getPosition() {
-		return position;
-	}
-
-	public void setPosition(String position) {
-		this.position = position;
-	}
-
 	public Team getUserTeam() {
 		return userTeam;
 	}
 
 	public void setUserTeam(Team userTeam) {
 		this.userTeam = userTeam;
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
 	}
 }

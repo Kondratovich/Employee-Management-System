@@ -242,8 +242,8 @@
                         <td th:text="${project.customer.email}"></td>
                         <td th:text="${project.description}"></td>
                         <td th:text="${project.price+'$'}"></td>
-                        <td th:text="${#dates.format(project.dateAdded, 'dd-MM-yyyy')}"></td>
-                        <td th:text="${#dates.format(project.deadline, 'dd-MM-yyyy')}"></td>
+                        <td th:text="${#dates.format(project.dateAdded, 'yyyy-MM-dd')}"></td>
+                        <td th:text="${#dates.format(project.deadline, 'yyyy-MM-dd')}"></td>
                         <td><a th:href="@{/manager/projects/showUpdateForm/{id}(id=${project.id})}"
                                class="btn btn-primary">Изменить</a>
                             <a th:href="@{/manager/projects/delete/{id}(id=${project.id})}"

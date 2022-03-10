@@ -76,45 +76,44 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 col-md-offset-3">
-                <h1> Sign-in </h1>
+                <h1>Логин</h1>
                 <form th:action="@{/login}" method="post">
 
-                    <!-- error message -->
                     <div th:if="${param.error}">
-                        <div class="alert alert-danger">Invalid username or
-                            password.
+                        <div class="alert alert-danger">
+                            Неверный логин или пароль!
                         </div>
                     </div>
 
-                    <!-- logout message -->
                     <div th:if="${param.logout}">
-                        <div class="alert alert-info">You have been logged out.</div>
+                        <div class="alert alert-info">Вы вышли из аккаунта!</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="username"> Username: </label>
-                        <input type="text" class="form-control" id="username" name="username"
+                        <label for="username"> Почта: </label>
+                        <input type="text"
+                               th:class="${param.error}? 'form-control is-invalid' : 'form-control'"
+                               id="username" name="username"
                                placeholder="Enter Email" autofocus="autofocus">
                     </div>
 
                     <div class="form-group">
-                        <label for="password"> Password: </label>
+                        <label for="password"> Пароль: </label>
                         <input type="password"
                                id="password" name="password"
-                               class="form-control"
+                               th:class="${param.error}? 'form-control is-invalid' : 'form-control'"
                                placeholder="Enter Password"/>
                     </div>
 
                     <div class="form-group">
                         <div class="m-4">
                             <input type="submit" name="login-submit" id="login-submit"
-                                   class="form-control btn btn-primary" value="Log In"/>
+                                   class="form-control btn btn-primary" value="Войти в аккаунт"/>
                         </div>
                     </div>
                 </form>
                 <div class="form-group">
-						<span>New user? <a href="/" th:href="@{/registration}">Register
-								here</a></span>
+                    <span>Новый пользователь? <a href="/" th:href="@{/registration}">Регистрация здесь</a></span>
                 </div>
             </div>
         </div>

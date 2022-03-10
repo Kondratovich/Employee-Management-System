@@ -1,6 +1,6 @@
 package com.company.springboot.service;
 
-import com.company.springboot.dto.UserRegistrationDto;
+import com.company.springboot.dto.UserDto;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -13,9 +13,13 @@ public interface UserService extends UserDetailsService{
 
 	User getEmployeeById(long id);
 
+	User getEmployeeByEmail(String email);
+
 	void deleteEmployeeById(long id);
 
 	Page<User> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 
-	User save(UserRegistrationDto registrationDto);
+	User save(UserDto registrationDto);
+
+	User edit(User user);
 }

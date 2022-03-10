@@ -1,6 +1,10 @@
 package com.company.springboot.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Entity
@@ -15,13 +19,18 @@ public class Customer {
     private Collection<Project> projects;
 
     @Column(name = "first_name")
+    @Size(min = 2, max = 30)
     private String firstName;
 
     @Column(name = "last_name")
+    @Size(min = 2, max = 30)
     private String lastName;
 
+    @Email
+    @NotNull
     private String email;
 
+    @Size(min = 2, max = 50)
     private String location;
 
     public long getId() {
