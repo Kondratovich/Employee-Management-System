@@ -6,8 +6,7 @@
 
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css"
-          rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -37,10 +36,10 @@
         </textarea>
 
         <label th:for="*{dateAdded}">Дата начала разработки</label>
-        <input type="text" th:field="*{dateAdded}" class="${#fields.hasErrors('dateAdded')}? 'form-control mb-4 col-4 is-invalid datepicker' : 'form-control mb-4 col-4 datepicker'">
+        <input type="text" th:field="*{dateAdded}" th:class="${#fields.hasErrors('dateAdded')}? 'form-control mb-4 col-4 is-invalid datepicker' : 'form-control mb-4 col-4 datepicker'">
 
         <label th:for="*{deadline}">Дедлайн</label>
-        <input type="text" th:field="*{deadline}" class="${#fields.hasErrors('deadline')}? 'form-control mb-4 col-4 is-invalid datepicker' : 'form-control mb-4 col-4 datepicker'">
+        <input type="text" th:field="*{deadline}" th:class="${#fields.hasErrors('deadline')}? 'form-control mb-4 col-4 is-invalid datepicker' : 'form-control mb-4 col-4 datepicker'">
 
         <label th:for="*{customerId}">Заказчик</label>
         <select th:field="*{customerId}" class="form-control mb-4 col-4">

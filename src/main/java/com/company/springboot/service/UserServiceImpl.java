@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.company.springboot.dto.UserDto;
+import com.company.springboot.repository.PositionRepository;
 import com.company.springboot.repository.RoleRepository;
 import com.company.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,19 +27,28 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+    private PositionRepository positionRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PositionRepository positionRepository) {
         super();
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.positionRepository = positionRepository;
     }
 
     @Override
     public List<User> getAllEmployees() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<User> getAllWithoutTeam() {
+        List<User> users = userRepository.findAllByUserTeamIsNull();
+        users.removeIf(u -> (u.getPosition() == null || u.getPosition().getId() == 5));
+        return users;
     }
 
     @Override
@@ -79,7 +89,8 @@ public class UserServiceImpl implements UserService {
                 registrationDto.getLastName(),
                 registrationDto.getEmail(),
                 passwordEncoder.encode(registrationDto.getPassword()),
-                Collections.singleton(roleRepository.getOne(1L))
+                Collections.singleton(roleRepository.getOne(1L)),
+                positionRepository.getOne(registrationDto.getPositionId())
         );
 
         return userRepository.save(user);

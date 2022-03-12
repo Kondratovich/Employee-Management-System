@@ -1,8 +1,6 @@
 package com.company.springboot.service;
 
-import com.company.springboot.dto.ProjectDto;
 import com.company.springboot.model.Project;
-import com.company.springboot.repository.CustomerRepository;
 import com.company.springboot.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,12 +18,14 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
 
-    @Autowired
-    private CustomerRepository customerRepository;
-
     @Override
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
+    }
+
+    @Override
+    public List<Project> getAllProjectsWithoutTeam() {
+        return projectRepository.findAllByTeamIsNull();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ProjectServiceImpl implements ProjectService {
         if (optional.isPresent()) {
             project = optional.get();
         } else {
-            throw new RuntimeException(" Employee not found for id :: " + id);
+            throw new RuntimeException(" Project not found for id :: " + id);
         }
         return project;
     }

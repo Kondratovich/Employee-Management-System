@@ -20,6 +20,13 @@ public class Team {
     @OneToMany(mappedBy = "userTeam")
     private Collection<User> users;
 
+    public Team() {
+    }
+
+    public Team(String officeLocation) {
+        this.officeLocation = officeLocation;
+    }
+
     public long getId() {
         return id;
     }

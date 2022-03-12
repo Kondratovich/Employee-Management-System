@@ -1,34 +1,23 @@
-package com.company.springboot.model;
+package com.company.springboot.dto;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "tasks")
-public class Task {
+public class TaskDto {
 
-    @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
+    @NotNull
+    private long projectId;
 
+    @Size(min = 2, max = 30)
     private String name;
 
+    @Size(min = 2, max = 300)
     private String description;
 
+    @NotNull
     private String status;
-
-    public Task() {
-    }
-
-    public Task(Project project, String name, String description, String status) {
-        this.project = project;
-        this.name = name;
-        this.description = description;
-        this.status = status;
-    }
 
     public long getId() {
         return id;
@@ -54,12 +43,12 @@ public class Task {
         this.description = description;
     }
 
-    public Project getProject() {
-        return project;
+    public long getProjectId() {
+        return projectId;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
     }
 
     public String getStatus() {

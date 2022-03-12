@@ -47,7 +47,7 @@ public class User implements UserDetails {
 		
 	}
 
-	public User(String firstName, String lastName, String email, String password, Set<Role> roles) {
+	public User(String firstName, String lastName, String email, String password, Set<Role> roles, Position position) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;

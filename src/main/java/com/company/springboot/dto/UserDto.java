@@ -1,16 +1,13 @@
 package com.company.springboot.dto;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class UserDto {
 
 	private long id;
 
 	@NotNull
-	private long position_id;
+	private long positionId;
 
 	@Size(min = 2, max = 30)
 	private String firstName;
@@ -18,8 +15,8 @@ public class UserDto {
 	@Size(min = 2, max = 30)
 	private String lastName;
 
+	@NotBlank
 	@Email
-	@NotNull
 	private String email;
 
 	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$")
@@ -31,9 +28,9 @@ public class UserDto {
 		
 	}
 
-	public UserDto(long id, long position_id, String firstName, String lastName, String email, String password) {
+	public UserDto(long id, long positionId, String firstName, String lastName, String email, String password) {
 		this.id = id;
-		this.position_id = position_id;
+		this.positionId = positionId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -48,12 +45,12 @@ public class UserDto {
 		this.id = id;
 	}
 
-	public long getPosition_id() {
-		return position_id;
+	public long getPositionId() {
+		return positionId;
 	}
 
-	public void setPosition_id(long position_id) {
-		this.position_id = position_id;
+	public void setPositionId(long positionId) {
+		this.positionId = positionId;
 	}
 
 	public String getFirstName() {

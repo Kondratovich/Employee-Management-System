@@ -11,6 +11,8 @@ import java.util.List;
 public interface UserService extends UserDetailsService{
 	List<User> getAllEmployees();
 
+	List<User> getAllWithoutTeam();
+
 	User getEmployeeById(long id);
 
 	User getEmployeeByEmail(String email);

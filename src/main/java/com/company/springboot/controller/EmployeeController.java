@@ -58,7 +58,7 @@ public class EmployeeController {
 
         if (employee.getId() != 0) {
             User user = userService.getEmployeeById(employee.getId());
-            user.setPosition(positionService.getPositionById(employee.getPosition_id()));
+            user.setPosition(positionService.getPositionById(employee.getPositionId()));
             user.setFirstName(employee.getFirstName());
             user.setLastName(employee.getLastName());
             user.setEmail(employee.getEmail());

@@ -39,8 +39,8 @@
         <input type="text" th:field="*{email}"
                placeholder="Почта" th:class="${#fields.hasErrors('email')}? 'form-control mb-4 col-4 is-invalid' : 'form-control mb-4 col-4'">
 
-        <label th:for="*{position_id}">Должность</label>
-        <select th:field="*{position_id}" class="form-control mb-4 col-4">
+        <label th:for="*{positionId}">Должность</label>
+        <select th:field="*{positionId}" class="form-control mb-4 col-4">
             <option th:each="pos : ${listPositions}" th:value="${pos.id}" th:text="${pos.positionName}"></option>
         </select>
 

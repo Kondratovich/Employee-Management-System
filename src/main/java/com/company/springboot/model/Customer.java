@@ -1,10 +1,7 @@
 package com.company.springboot.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Collection;
 
 @Entity
@@ -26,8 +23,8 @@ public class Customer {
     @Size(min = 2, max = 30)
     private String lastName;
 
+    @NotBlank
     @Email
-    @NotNull
     private String email;
 
     @Size(min = 2, max = 50)
