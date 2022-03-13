@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = {"/manager", "/user"})
+@RequestMapping(value = {"/manager"})
 public class TaskController {
 
     private final TaskService taskService;

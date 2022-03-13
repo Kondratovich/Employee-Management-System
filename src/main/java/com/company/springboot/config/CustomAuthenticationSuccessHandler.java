@@ -21,7 +21,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             response.sendRedirect("/manager/projects");
         }
         else {
-            response.sendRedirect("/user");
+            response.sendRedirect("/user/tasks");
         }
     }
 }

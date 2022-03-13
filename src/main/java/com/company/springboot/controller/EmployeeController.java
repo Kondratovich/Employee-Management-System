@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping(value = {"/manager", "/user"})
+@RequestMapping(value = {"/manager"})
 public class EmployeeController {
 
     private final UserService userService;

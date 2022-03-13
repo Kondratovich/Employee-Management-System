@@ -14,5 +14,7 @@ public interface TaskService {
 
     void deleteTaskById(long id);
 
+    void markTaskAsDone(long id);
+
     Page<Task> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 }

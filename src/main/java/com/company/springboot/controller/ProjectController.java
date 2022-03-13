@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = {"/manager", "/user"})
+@RequestMapping(value = {"/manager"})
 public class ProjectController {
 
     private final ProjectService projectService;

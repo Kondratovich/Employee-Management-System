@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = {"/manager", "/user"})
+@RequestMapping(value = {"/manager"})
 public class CustomerController {
 
 	private final CustomerService customerService;

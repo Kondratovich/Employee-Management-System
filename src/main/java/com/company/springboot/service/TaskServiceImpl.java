@@ -46,6 +46,13 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
+	public void markTaskAsDone(long id) {
+		Task task = taskRepository.getOne(id);
+		task.setStatus("Выполнена");
+		taskRepository.save(task);
+	}
+
+	@Override
 	public Page<Task> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
 		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
 				Sort.by(sortField).descending();

@@ -93,7 +93,7 @@
             инфраструктуры, который включает в себя создание IT отдела. </p>
         <p sec:authorize="isAuthenticated()" class="lead">
             <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/manager/projects}" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Перейти в личный кабинет менеджера</a>
-            <a sec:authorize="hasRole('ROLE_USER')" th:href="@{/user}" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Перейти в личный кабинет сотрудника</a>
+            <a sec:authorize="hasRole('ROLE_USER')" th:href="@{/user/tasks}" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Перейти в личный кабинет сотрудника</a>
         </p>
     </main>
 

@@ -21,7 +21,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = {"/manager", "/user"})
+@RequestMapping(value = {"/manager"})
 public class TeamController {
 
     private final TeamService teamService;
